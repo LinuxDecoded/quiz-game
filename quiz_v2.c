@@ -2,11 +2,11 @@
 #include<conio.h>
 #include<ctype.h>
 #include<stdlib.h>
-// #include<string.h>
+#include<string.h>
 #include<time.h>
 #include "questions.h"
 
-#define MaxQues 28
+#define MaxQues 24
 
 void startGame(void);
 void showRecord(void);
@@ -53,16 +53,23 @@ int main() {
 void game(void) {
     system("cls");
     srand(time(0));
-    int random;
-    printf("Do you want to continue: ");
-    scanf("%c", &choice);
-    while(choice == 'Y') {
+    int random, opt;
+    while(1) {
         int random = (rand() % (MaxQues + 1)) ;
-        printf("Question is: \n%s\n",questions[random].quest);
-        printf("Do you want to continue: ");
-        scanf(" %c", &choice);
+        printf("Question is: \n\n%s\n",questions[random].quest);
+        printf("1)%s    2)%s    3)%s    4)%s\n",questions[random].options[0],questions[random].options[1],questions[random].options[2],questions[random].options[3]);
+        printf("\nEnter your choice (1-4): ");
+        scanf(" %d",&opt);
+        if(strcmp(questions[random].options[opt-1], questions[random].answer) == 0) {
+            printf("\nRight answer !!!\n\n");
+        }
+        else {
+            printf("\nWrong answer !!!\n");
+            break;
+        }
+        fflush(stdin);
     }
-    
+
     getch();
     return;
 }
