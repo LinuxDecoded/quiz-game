@@ -22,7 +22,7 @@ question questions[30] = {
                             {13, "What is the National Name of Japan?", {"Polska","Hellas","Drukyul","Nippon"}, "Nippon"},
                             {14, "How many times a piece of paper can be folded at the most?", {"6","7","8","Depends on the size of paper"}, "7"},
                             {15, "What is the capital of Denmark?", {"Copenhagen","Helsinki","Ajax","Galatasaray"}, "Copenhagen"},
-                            {16, "Which is the Longest River in the world?", {"a","b","c","d"}, "answer"},
+                            {16, "Which is the Longest River in the world?", {"Nile","Koshi","Ganga","Amazon"}, "Nile"},
                             {17, "What is the color of the Black Box in airplanes?", {"a","b","c","d"}, "answer"},
                             {18, "Which city is known as 'The City of Seven Hills'?", {"a","b","c","d"}, "answer"},
                             {19, "Name the country where there no mosquitoes are found?", {"a","b","c","d"}, "answer"},
