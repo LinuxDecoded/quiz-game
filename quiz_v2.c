@@ -132,7 +132,7 @@ void resetScores(void) {
 	f=fopen("score.txt","w");
 	fscanf(f,"%s%f",&playerName,&score);
 	score=0;
-	fprintf(f,"%s,%d",playerName,score);
+	fprintf(f,"%s%d",playerName,score);
     fclose(f);
     system("cls");
     printf("Score reset complete !!!");
@@ -142,7 +142,7 @@ void resetScores(void) {
 void showRecord(void) {
     system("cls");
 	char playerName[15];
-	float score;
+	int score;
 	FILE *f;
 	f=fopen("score.txt","r");
 	fscanf(f,"%s%d",&playerName,&score);
@@ -184,7 +184,7 @@ void saveScore(char user[15], int score) {
 	fclose(f);
 	if (score>=sc){
 	    f=fopen("score.txt","w");
-	    fprintf(f,"%s\n%d",user,score);
+	    fprintf(f,"%s%d",user,score);
 	    fclose(f);
     }
 }
