@@ -12,7 +12,8 @@ void startGame(void);
 void showRecord(void);
 void resetScores(void);
 void help(void);
-void game(void);
+void game(char playerName[15]);
+void saveScore(char user[15], int score);
 
 char playerName[15];
 char choice;
@@ -42,6 +43,15 @@ int main() {
             case 'S':
                 startGame();
                 break;
+            case 'R':
+                resetScores();
+                break;
+            case 'V':
+                showRecord();
+                break;
+            case 'H':
+                help();
+                break;
             case 'Q':
                 exit(0);
                 break;
@@ -50,10 +60,10 @@ int main() {
     return 0;
 }
 
-void game(void) {
+void game(char playerName[15]) {
     system("cls");
     srand(time(0));
-    int random, opt;
+    int random, opt, life=3, score=0;
     while(1) {
         int random = (rand() % (MaxQues + 1)) ;
         printf("Question is: \n\n%s\n",questions[random].quest);
@@ -62,10 +72,19 @@ void game(void) {
         scanf(" %d",&opt);
         if(strcmp(questions[random].options[opt-1], questions[random].answer) == 0) {
             printf("\nRight answer !!!\n\n");
+            score+=100;
+            printf("Current Score is: %d\n",score);
         }
         else {
             printf("\nWrong answer !!!\n");
-            break;
+            life--;
+            printf("Life left for playing: %d\n",life);
+            printf("Your Score: %d\n",score);
+            if(life==0){
+                printf("\nNo life left for playing further !!!\n");
+                saveScore(playerName, score);
+                break;
+            }
         }
         fflush(stdin);
     }
@@ -98,10 +117,74 @@ void startGame(void) {
     printf("\n Press any other key to return to the main menu!");
     
 	if (toupper(getch())=='Y'){
-	    game();
+	    game(playerName);
         return;
     }
 	else {
         return;
+    }
+}
+
+void resetScores(void) {
+	FILE *f;
+    char playerName[15]={" "};
+    int score;
+	f=fopen("score.txt","w");
+	fscanf(f,"%s%f",&playerName,&score);
+	score=0;
+	fprintf(f,"%s,%d",playerName,score);
+    fclose(f);
+    system("cls");
+    printf("Score reset complete !!!");
+    getch();
+}
+
+void showRecord(void) {
+    system("cls");
+	char name[20];
+	float scr;
+	FILE *f;
+	f=fopen("score.txt","r");
+	fscanf(f,"%s%f",&name,&scr);
+	printf("\n\n\t\t*************************************************************");
+	printf("\n\n\t\t %s has secured the Highest Score %0.2f",name,scr);
+	printf("\n\n\t\t*************************************************************");
+	fclose(f);
+	getch();
+}
+
+void help(void) {
+    system("cls");
+    printf("\n\n                              HELP");
+    printf("\n -------------------------------------------------------------------------");
+    printf("\n ......................... C program Quiz Game...........");
+    printf("\n >> There are two rounds in the game, WARMUP ROUND & CHALLANGE ROUND");
+    printf("\n >> In warmup round you will be asked a total of 3 questions to test your general");
+    printf("\n    knowledge. You will be eligible to play the game if you can give atleast 2");
+    printf("\n    right answers otherwise you can't play the Game...........");
+    printf("\n >> Your game starts with the CHALLANGE ROUND. In this round you will be asked");
+    printf("\n    total 10 questions each right answer will be awarded $100,000.");
+    printf("\n    By this way you can win upto ONE MILLION cash prize in USD...............");
+    printf("\n >> You will be given 4 options and you have to press A, B ,C or D for the");
+    printf("\n    right option");
+    printf("\n >> You will be asked questions continuously if you keep giving the right answers.");
+    printf("\n >> No negative marking for wrong answers");
+
+	printf("\n\n\t*********************BEST OF LUCK*********************************");
+	printf("\n\n\t*****C PROGRAM QUIZ GAME is developed by CODE WITH C TEAM********");
+    getch();
+}
+
+void saveScore(char user[15], int score) {
+    char playerName[15];
+    int sc;
+	FILE *f;
+	f=fopen("score.txt","r");
+	fscanf(f,"%s%d",&playerName,&sc);
+	fclose(f);
+	if (score>=sc){
+	    f=fopen("score.txt","w");
+	    fprintf(f,"%s\n%d",user,score);
+	    fclose(f);
     }
 }
