@@ -141,13 +141,13 @@ void resetScores(void) {
 
 void showRecord(void) {
     system("cls");
-	char name[20];
-	float scr;
+	char playerName[15];
+	float score;
 	FILE *f;
 	f=fopen("score.txt","r");
-	fscanf(f,"%s%f",&name,&scr);
+	fscanf(f,"%s%d",&playerName,&score);
 	printf("\n\n\t\t*************************************************************");
-	printf("\n\n\t\t %s has secured the Highest Score %0.2f",name,scr);
+	printf("\n\n\t\t %s has secured the Highest Score %d",playerName,score);
 	printf("\n\n\t\t*************************************************************");
 	fclose(f);
 	getch();
