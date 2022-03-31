@@ -65,6 +65,7 @@ void game(char playerName[15]) {
     srand(time(0));
     int random, opt, life=3, score=0;
     while(1) {
+        system("cls");
         int random = (rand() % (MaxQues + 1)) ;
         printf("Question is: \n\n%s\n",questions[random].quest);
         printf("1)%s    2)%s    3)%s    4)%s\n",questions[random].options[0],questions[random].options[1],questions[random].options[2],questions[random].options[3]);
@@ -74,6 +75,8 @@ void game(char playerName[15]) {
             printf("\nRight answer !!!\n\n");
             score+=100;
             printf("Current Score is: %d\n",score);
+            printf("Press enter to continue....");
+            getch();
         }
         else {
             printf("\nWrong answer !!!\n");
@@ -85,6 +88,8 @@ void game(char playerName[15]) {
                 saveScore(playerName, score);
                 break;
             }
+            printf("Press enter to continue....");
+            getch();
         }
         fflush(stdin);
     }
@@ -95,6 +100,7 @@ void game(char playerName[15]) {
 
 void startGame(void) {
     system("cls");
+    fflush(stdin);
     printf("\n\n\n\n\n\n\n\n\n\n\t\t\tResister your name:");
     fgets(playerName, 15, stdin);
     system("cls");
